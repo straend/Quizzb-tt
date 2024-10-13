@@ -17,13 +17,13 @@ class ExamAdmin(admin.ModelAdmin):
     readonly_fields = ["name", "pub_date", "uuid"]
     date_hierarchy = "pub_date"
     list_display = ["name", "pub_date", "score_count"]
-    inlines = [ExamScoreInline]
+    #inlines = [ExamScoreInline]
 
 @admin.register(ExamScore)
 class ExamScoreAdmin(admin.ModelAdmin):
     model = ExamScore
     ordering = ['taken']
-    list_filter = ["user", "exam"]
+    list_filter = ["user", "exam", "guild_id"]
     list_display = ["user", "exam", "score", "taken"]
     readonly_fields = ["user", "exam", "score", "taken"]
     date_hierarchy = "taken"

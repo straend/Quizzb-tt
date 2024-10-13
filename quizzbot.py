@@ -19,7 +19,6 @@ django.setup()
 # Now this script or any imported module can use any part of Django it needs.
 from ylequizz.models import Exam, Question, DiscoUser, ExamScore
 
-
 bot = Client(intents=Intents.DEFAULT)
 bot.load_extension("interactions.ext.jurigged")
 
@@ -86,11 +85,11 @@ async def my_command_function(ctx: SlashContext):
             break
     
     # Create user
-    u, _ = DiscoUser.objects.get_or_create(discord_id=ctx.author.id)
+    u, _ = DiscoUser.objects.get_or_create(discord_id=ctx.author.id, guild_id=ctx.guild.id)
     u.name = ctx.author
     u.save()
     
-    es, _ = ExamScore.objects.get_or_create(user=u, exam=exam)
+    es, _ = ExamScore.objects.get_or_create(user=u, exam=exam,guild_id=ctx.guild.id)
     es.score = points
     es.taken = timezone.now()
     es.save()

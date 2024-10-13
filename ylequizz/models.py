@@ -12,6 +12,7 @@ class ExamScore(models.Model):
     user = models.ForeignKey("DiscoUser", related_name="scores", on_delete=models.CASCADE)
     score = models.PositiveIntegerField(default=0)
     taken = models.DateTimeField(auto_created=True, blank=True, null=True)
+    guild_id = models.BigIntegerField(default=1)
 
 class Exam(models.Model):
     name = models.CharField(max_length=300)
@@ -26,7 +27,7 @@ class Exam(models.Model):
 class DiscoUser(models.Model):
     name = models.CharField(max_length=200)
     discord_id = models.IntegerField()
-    
+    guild_id = models.BigIntegerField(default=1)
     def __str__(self):
         return f"{self.name}"
     
